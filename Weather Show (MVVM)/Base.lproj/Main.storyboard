@@ -59,7 +59,7 @@
                         <barButtonItem key="leftBarButtonItem" title="Settings" id="G2W-ZC-kkc"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="VZf-Tp-uzD">
                             <connections>
-                                <segue destination="YEd-hY-RLu" kind="push" id="F6W-1Q-qcx"/>
+                                <action selector="addCityBtn" destination="1oA-SW-8Hc" id="oOR-7V-8Wp"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -71,13 +71,13 @@
         <!--Add City-->
         <scene sceneID="BxP-sz-6L8">
             <objects>
-                <viewController id="YEd-hY-RLu" customClass="AddCityViewController" customModule="Weather_Show__MVVM_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddCityVC" id="YEd-hY-RLu" customClass="AddCityViewController" customModule="Weather_Show__MVVM_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fIk-6c-Ase">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zDr-Jy-2hO">
-                                <rect key="frame" x="71.666666666666686" y="215" width="250" height="34"/>
+                                <rect key="frame" x="71.666666666666686" y="163" width="250" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="SLs-XP-zxP"/>
                                 </constraints>
@@ -85,7 +85,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ua-cu-got">
-                                <rect key="frame" x="156.66666666666666" y="279" width="80" height="41"/>
+                                <rect key="frame" x="156.66666666666666" y="227" width="80" height="41"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="UtY-Cj-705"/>
@@ -155,9 +155,6 @@
             <point key="canvasLocation" x="1789" y="5"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="F6W-1Q-qcx"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

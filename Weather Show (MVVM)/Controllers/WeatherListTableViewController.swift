@@ -7,31 +7,36 @@
 
 import UIKit
 
-class WeatherListTableViewController: UITableViewController {
-
+class WeatherListTableViewController: UITableViewController, AddWeatherDelegate {
+    
+    private var weatherListViewModel = WeatherListViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let resource = Resource<WeatherResponse>(url: URL(string: "https://api.openweathermap.org/data/2.5/weather?q=Cairo&appid=9a47cbf3f4130b18f6b83e36bae2caba&units=metric")!) { data in
-            return try? JSONDecoder().decode(WeatherResponse.self, from: data)
-        }
-        WebService().load(resource: resource) { weatherResponse in
-            if let weatherResponse = weatherResponse{
-                print(weatherResponse)
-            }
+                
+    }
+    
+    @IBAction func addCityBtn(){
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "AddCityVC") as? AddCityViewController{
+            vc.delegate = self
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         
     }
     
+    func addWeatherSave(vm: WeatherViewModel) {
+        weatherListViewModel.addWeatherVM(vm)
+        tableView.reloadData()
+    }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return weatherListViewModel.numberOfSection()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return weatherListViewModel.numberOfRow()
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -40,8 +45,10 @@ class WeatherListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "wCell", for: indexPath) as! WeatherCell
         
-        cell.cityNameLabel.text = "Cairo"
-        cell.tempertureLabel.text = "20°"
+        var singleWeather = weatherListViewModel.weatherInIndex(indexPath.row)
+        
+        cell.cityNameLabel.text = singleWeather.city
+        cell.tempertureLabel.text = String(format: "%.0f°", singleWeather.temp)
         
         return cell
     }
