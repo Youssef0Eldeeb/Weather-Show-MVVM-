@@ -11,7 +11,16 @@ class WeatherListTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let resource = Resource<WeatherResponse>(url: URL(string: "https://api.openweathermap.org/data/2.5/weather?q=Cairo&appid=9a47cbf3f4130b18f6b83e36bae2caba&units=metric")!) { data in
+            return try? JSONDecoder().decode(WeatherResponse.self, from: data)
+        }
+        WebService().load(resource: resource) { weatherResponse in
+            if let weatherResponse = weatherResponse{
+                print(weatherResponse)
+            }
+        }
+        
     }
     
 
